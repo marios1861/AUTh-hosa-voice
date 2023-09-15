@@ -1,6 +1,7 @@
 import lightning.pytorch as pl
 import torch
 from torch import nn
+from torchmetrics import Accuracy
 
 
 class VoiceClassifier(pl.LightningModule):
@@ -11,10 +12,79 @@ class VoiceClassifier(pl.LightningModule):
         self.lr = lr
         self.freeze_stage = freeze_stage
         self.loss = nn.CrossEntropyLoss()
+        self.tot_accuracy = Accuracy(task="multiclass", num_classes=4)
+        self.accuracy = Accuracy(task="multiclass", num_classes=4, average="none")
 
     def training_step(self, batch, batch_idx):
         x, y = batch
-        loss = self.loss(self.backbone(x), y)
+        preds = self.backbone(x)
+        loss = self.loss(preds, y)
+        self.tot_accuracy(preds, y)
+        self.accuracy(preds, y)
+        self.log("train_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
+        self.log(
+            "train_acc", self.tot_accuracy, on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "train_acc_0", self.accuracy[0], on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "train_acc_1", self.accuracy[1], on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "train_acc_2", self.accuracy[2], on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "train_acc_3", self.accuracy[3], on_step=True, on_epoch=True, prog_bar=True
+        )
+        return loss
+
+    def val_step(self, batch, batch_idx):
+        x, y = batch
+        preds = self.backbone(x)
+        loss = self.loss(preds, y)
+        self.tot_accuracy(preds, y)
+        self.accuracy(preds, y)
+        self.log("val_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
+        self.log(
+            "val_acc", self.tot_accuracy, on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "val_acc_0", self.accuracy[0], on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "val_acc_1", self.accuracy[1], on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "val_acc_2", self.accuracy[2], on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "val_acc_3", self.accuracy[3], on_step=True, on_epoch=True, prog_bar=True
+        )
+        return loss
+
+    def test_step(self, batch, batch_idx):
+        x, y = batch
+        preds = self.backbone(x)
+        loss = self.loss(preds, y)
+        self.tot_accuracy(preds, y)
+        self.accuracy(preds, y)
+        self.log("test_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
+        self.log(
+            "test_acc", self.tot_accuracy, on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "test_acc_0", self.accuracy[0], on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "test_acc_1", self.accuracy[1], on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "test_acc_2", self.accuracy[2], on_step=True, on_epoch=True, prog_bar=True
+        )
+        self.log(
+            "test_acc_3", self.accuracy[3], on_step=True, on_epoch=True, prog_bar=True
+        )
         return loss
 
     def configure_optimizers(self):
