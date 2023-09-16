@@ -22,19 +22,44 @@ class VoiceClassifier(pl.LightningModule):
         self.accuracy(preds, y)
         self.log("train_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
         self.log(
-            "train_acc", self.tot_accuracy, on_step=True, on_epoch=True, prog_bar=True
+            "train_acc",
+            self.tot_accuracy,
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="tot_accuracy",
         )
         self.log(
-            "train_acc_0", self.accuracy[0], on_step=True, on_epoch=True, prog_bar=True
+            "train_acc_0",
+            self.accuracy[0],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         self.log(
-            "train_acc_1", self.accuracy[1], on_step=True, on_epoch=True, prog_bar=True
+            "train_acc_1",
+            self.accuracy[1],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         self.log(
-            "train_acc_2", self.accuracy[2], on_step=True, on_epoch=True, prog_bar=True
+            "train_acc_2",
+            self.accuracy[2],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         self.log(
-            "train_acc_3", self.accuracy[3], on_step=True, on_epoch=True, prog_bar=True
+            "train_acc_3",
+            self.accuracy[3],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         return loss
 
@@ -46,19 +71,44 @@ class VoiceClassifier(pl.LightningModule):
         self.accuracy(preds, y)
         self.log("val_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
         self.log(
-            "val_acc", self.tot_accuracy, on_step=True, on_epoch=True, prog_bar=True
+            "val_acc",
+            self.tot_accuracy,
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="tot_accuracy",
         )
         self.log(
-            "val_acc_0", self.accuracy[0], on_step=True, on_epoch=True, prog_bar=True
+            "val_acc_0",
+            self.accuracy[0],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         self.log(
-            "val_acc_1", self.accuracy[1], on_step=True, on_epoch=True, prog_bar=True
+            "val_acc_1",
+            self.accuracy[1],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         self.log(
-            "val_acc_2", self.accuracy[2], on_step=True, on_epoch=True, prog_bar=True
+            "val_acc_2",
+            self.accuracy[2],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         self.log(
-            "val_acc_3", self.accuracy[3], on_step=True, on_epoch=True, prog_bar=True
+            "val_acc_3",
+            self.accuracy[3],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         return loss
 
@@ -70,19 +120,44 @@ class VoiceClassifier(pl.LightningModule):
         self.accuracy(preds, y)
         self.log("test_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
         self.log(
-            "test_acc", self.tot_accuracy, on_step=True, on_epoch=True, prog_bar=True
+            "test_acc",
+            self.tot_accuracy,
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="tot_accuracy",
         )
         self.log(
-            "test_acc_0", self.accuracy[0], on_step=True, on_epoch=True, prog_bar=True
+            "test_acc_0",
+            self.accuracy[0],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         self.log(
-            "test_acc_1", self.accuracy[1], on_step=True, on_epoch=True, prog_bar=True
+            "test_acc_1",
+            self.accuracy[1],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         self.log(
-            "test_acc_2", self.accuracy[2], on_step=True, on_epoch=True, prog_bar=True
+            "test_acc_2",
+            self.accuracy[2],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         self.log(
-            "test_acc_3", self.accuracy[3], on_step=True, on_epoch=True, prog_bar=True
+            "test_acc_3",
+            self.accuracy[3],
+            on_step=True,
+            on_epoch=True,
+            prog_bar=True,
+            metric_attribute="accuracy",
         )
         return loss
 
