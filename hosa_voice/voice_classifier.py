@@ -63,7 +63,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         return loss
 
-    def val_step(self, batch, batch_idx):
+    def validation_step(self, batch, batch_idx):
         x, y = batch
         preds = self.backbone(x)
         loss = self.loss(preds, y)
