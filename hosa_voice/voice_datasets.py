@@ -463,10 +463,10 @@ class DatasetModule(LightningDataModule):
             ]
         )
         self.train_dataset = ImageFolder(
-            self.kwards["data_dir"], transform=train_transforms
+            self.kwargs["data_dir"], transform=train_transforms
         )
         self.test_dataset = ImageFolder(
-            self.kwards["data_dir"], transform=test_transforms
+            self.kwarg["data_dir"], transform=test_transforms
         )
         class_weights = 1.0 / self.spread.float()
         train_samples_weight = torch.tensor(
