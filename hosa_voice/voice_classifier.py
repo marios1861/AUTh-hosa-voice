@@ -5,12 +5,11 @@ from torchmetrics import Accuracy
 
 
 class VoiceClassifier(pl.LightningModule):
-    def __init__(self, backbone, lr, freeze_stage):
+    def __init__(self, backbone, lr):
         super().__init__()
         self.save_hyperparameters()
         self.backbone = backbone
         self.lr = lr
-        self.freeze_stage = freeze_stage
         self.loss = nn.CrossEntropyLoss()
         self.tot_accuracy = Accuracy(task="multiclass", num_classes=4)
         self.accuracy = Accuracy(task="multiclass", num_classes=4, average="none")
