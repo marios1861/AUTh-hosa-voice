@@ -121,11 +121,10 @@ class VoiceClassifier(pl.LightningModule):
         self.tot_accuracy(preds, y)
         self.accuracy(preds, y)
         accuracies = self.accuracy
-        self.log("test_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
+        self.log("test_loss", loss, on_epoch=True, prog_bar=True)
         self.log(
             "test_acc",
             self.tot_accuracy,
-            on_step=True,
             on_epoch=True,
             prog_bar=True,
             metric_attribute="tot_accuracy",
@@ -133,7 +132,6 @@ class VoiceClassifier(pl.LightningModule):
         self.log(
             "test_acc_0",
             accuracies[0],
-            on_step=True,
             on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
@@ -141,7 +139,6 @@ class VoiceClassifier(pl.LightningModule):
         self.log(
             "test_acc_1",
             accuracies[1],
-            on_step=True,
             on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
@@ -149,7 +146,6 @@ class VoiceClassifier(pl.LightningModule):
         self.log(
             "test_acc_2",
             accuracies[2],
-            on_step=True,
             on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
@@ -157,7 +153,6 @@ class VoiceClassifier(pl.LightningModule):
         self.log(
             "test_acc_3",
             accuracies[3],
-            on_step=True,
             on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
