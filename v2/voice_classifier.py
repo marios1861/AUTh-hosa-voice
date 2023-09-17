@@ -20,6 +20,7 @@ class VoiceClassifier(pl.LightningModule):
         loss = self.loss(preds, y)
         self.tot_accuracy(preds, y)
         self.accuracy(preds, y)
+        accuracies = self.accuracy
         self.log("train_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
         self.log(
             "train_acc",
@@ -31,7 +32,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "train_acc_0",
-            self.accuracy[0],
+            accuracies[0],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -39,7 +40,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "train_acc_1",
-            self.accuracy[1],
+            accuracies[1],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -47,7 +48,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "train_acc_2",
-            self.accuracy[2],
+            accuracies[2],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -55,7 +56,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "train_acc_3",
-            self.accuracy[3],
+            accuracies[3],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -69,6 +70,7 @@ class VoiceClassifier(pl.LightningModule):
         loss = self.loss(preds, y)
         self.tot_accuracy(preds, y)
         self.accuracy(preds, y)
+        accuracies = self.accuracy
         self.log("val_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
         self.log(
             "val_acc",
@@ -80,7 +82,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "val_acc_0",
-            self.accuracy[0],
+            accuracies[0],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -88,7 +90,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "val_acc_1",
-            self.accuracy[1],
+            accuracies[1],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -96,7 +98,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "val_acc_2",
-            self.accuracy[2],
+            accuracies[2],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -104,7 +106,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "val_acc_3",
-            self.accuracy[3],
+            accuracies[3],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -118,6 +120,7 @@ class VoiceClassifier(pl.LightningModule):
         loss = self.loss(preds, y)
         self.tot_accuracy(preds, y)
         self.accuracy(preds, y)
+        accuracies = self.accuracy
         self.log("test_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
         self.log(
             "test_acc",
@@ -129,7 +132,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "test_acc_0",
-            self.accuracy[0],
+            accuracies[0],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -137,7 +140,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "test_acc_1",
-            self.accuracy[1],
+            accuracies[1],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -145,7 +148,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "test_acc_2",
-            self.accuracy[2],
+            accuracies[2],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
@@ -153,7 +156,7 @@ class VoiceClassifier(pl.LightningModule):
         )
         self.log(
             "test_acc_3",
-            self.accuracy[3],
+            accuracies[3],
             on_step=True,
             on_epoch=True,
             prog_bar=True,
