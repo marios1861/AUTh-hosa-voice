@@ -21,43 +21,43 @@ class VoiceClassifier(pl.LightningModule):
         self.tot_accuracy(preds, y)
         self.accuracy(preds, y)
         accuracies = self.accuracy
-        self.log("train_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
+        self.log("train/loss", loss, on_step=False, on_epoch=True, prog_bar=True)
         self.log(
-            "train_acc",
+            "train/acc",
             self.tot_accuracy,
-            on_step=True,
+            on_step=False,
             on_epoch=True,
             prog_bar=True,
             metric_attribute="tot_accuracy",
         )
         self.log(
-            "train_acc_0",
+            "train/acc_0",
             accuracies[0],
-            on_step=True,
+            on_step=False,
             on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
         )
         self.log(
-            "train_acc_1",
+            "train/acc_1",
             accuracies[1],
-            on_step=True,
+            on_step=False,
             on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
         )
         self.log(
-            "train_acc_2",
+            "train/acc_2",
             accuracies[2],
-            on_step=True,
+            on_step=False,
             on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
         )
         self.log(
-            "train_acc_3",
+            "train/acc_3",
             accuracies[3],
-            on_step=True,
+            on_step=False,
             on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
@@ -71,44 +71,34 @@ class VoiceClassifier(pl.LightningModule):
         self.tot_accuracy(preds, y)
         self.accuracy(preds, y)
         accuracies = self.accuracy
-        self.log("val_loss", loss, on_step=True, on_epoch=True, prog_bar=True)
+        self.log("val/loss", loss, prog_bar=True)
         self.log(
-            "val_acc",
+            "val/acc",
             self.tot_accuracy,
-            on_step=True,
-            on_epoch=True,
             prog_bar=True,
             metric_attribute="tot_accuracy",
         )
         self.log(
-            "val_acc_0",
+            "val/acc_0",
             accuracies[0],
-            on_step=True,
-            on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
         )
         self.log(
-            "val_acc_1",
+            "val/acc_1",
             accuracies[1],
-            on_step=True,
-            on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
         )
         self.log(
-            "val_acc_2",
+            "val/acc_2",
             accuracies[2],
-            on_step=True,
-            on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
         )
         self.log(
-            "val_acc_3",
+            "val/acc_3",
             accuracies[3],
-            on_step=True,
-            on_epoch=True,
             prog_bar=True,
             metric_attribute="accuracy",
         )
@@ -121,40 +111,30 @@ class VoiceClassifier(pl.LightningModule):
         self.tot_accuracy(preds, y)
         self.accuracy(preds, y)
         accuracies = self.accuracy
-        self.log("test_loss", loss, on_epoch=True, prog_bar=True)
+        self.log("test/loss", loss, prog_bar=True)
         self.log(
-            "test_acc",
+            "test/acc",
             self.tot_accuracy,
-            on_epoch=True,
-            prog_bar=True,
             metric_attribute="tot_accuracy",
         )
         self.log(
-            "test_acc_0",
+            "test/acc_0",
             accuracies[0],
-            on_epoch=True,
-            prog_bar=True,
             metric_attribute="accuracy",
         )
         self.log(
-            "test_acc_1",
+            "test/acc_1",
             accuracies[1],
-            on_epoch=True,
-            prog_bar=True,
             metric_attribute="accuracy",
         )
         self.log(
-            "test_acc_2",
+            "test/acc_2",
             accuracies[2],
-            on_epoch=True,
-            prog_bar=True,
             metric_attribute="accuracy",
         )
         self.log(
-            "test_acc_3",
+            "test/acc_3",
             accuracies[3],
-            on_epoch=True,
-            prog_bar=True,
             metric_attribute="accuracy",
         )
         return loss
