@@ -443,17 +443,29 @@ class DatasetModule(LightningDataModule):
         ]
 
     def setup(self, stage: str):
-        transforms = v2.Compose(
+        train_transforms = v2.Compose(
             [
-                v2.Resize(size=(224, 24), antialias=True),
+                v2.Resize(size=(256, 256), antialias=True),
+                v2.RandomCrop(size=(224, 224)),
+                v2.RandomHorizontalFlip(p=0.5),
                 v2.ToImageTensor(),
                 v2.ConvertDtype(torch.float),
                 v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
             ]
         )
-        self.dataset = ImageFolder(
-            self.kwargs["data_dir"], transform=transforms
+        test_transforms = v2.Compose(
+            [
+                v2.Resize(size=(224, 224), antialias=True),
+                v2.ToImageTensor(),
+                v2.ConvertDtype(torch.float),
+                v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            ]
         )
+        self.train_dataset = ImageFolder(
+            self.kwargs["data_dir"], transform=train_transforms
+        )
+        self.test_dataset = ImageFolder(
+            self.kwargs["data_dir"], transform=test_transforms
         class_weights = 1.0 / self.spread.float()
         train_samples_weight = torch.tensor(
             [class_weights[t] for t in self.train_targets]
@@ -461,9 +473,9 @@ class DatasetModule(LightningDataModule):
         self.sampler = WeightedRandomSampler(
             train_samples_weight, len(train_samples_weight)
         )
-        self.train_dataset = Subset(self.dataset, self.train_idxs)
-        self.val_dataset = Subset(self.dataset, self.val_idxs)
-        self.test_dataset = Subset(self.dataset, self.test_idxs)
+        self.train_dataset = Subset(self.train_dataset, self.train_idxs)
+        self.val_dataset = Subset(self.test_dataset, self.val_idxs)
+        self.test_dataset = Subset(self.test_dataset, self.test_idxs)
 
     def train_dataloader(self):
         return DataLoader(
