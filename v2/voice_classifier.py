@@ -13,6 +13,10 @@ class VoiceClassifier(pl.LightningModule):
         self.loss = nn.CrossEntropyLoss()
         self.tot_accuracy = Accuracy(task="multiclass", num_classes=4)
         self.accuracy = Accuracy(task="multiclass", num_classes=4, average="none")
+        self.val_tot_accuracy = Accuracy(task="multiclass", num_classes=4)
+        self.val_accuracy = Accuracy(task="multiclass", num_classes=4, average="none")
+        self.test_tot_accuracy = Accuracy(task="multiclass", num_classes=4)
+        self.test_accuracy = Accuracy(task="multiclass", num_classes=4, average="none")
 
     def training_step(self, batch, batch_idx):
         x, y = batch
@@ -68,13 +72,13 @@ class VoiceClassifier(pl.LightningModule):
         x, y = batch
         preds = self.backbone(x)
         loss = self.loss(preds, y)
-        self.tot_accuracy(preds, y)
-        self.accuracy(preds, y)
-        accuracies = self.accuracy
+        self.val_tot_accuracy(preds, y)
+        self.val_accuracy(preds, y)
+        accuracies = self.val_accuracy
         self.log("val/loss", loss, prog_bar=True)
         self.log(
             "val/acc",
-            self.tot_accuracy,
+            self.val_tot_accuracy,
             prog_bar=True,
             metric_attribute="tot_accuracy",
         )
@@ -108,13 +112,13 @@ class VoiceClassifier(pl.LightningModule):
         x, y = batch
         preds = self.backbone(x)
         loss = self.loss(preds, y)
-        self.tot_accuracy(preds, y)
-        self.accuracy(preds, y)
-        accuracies = self.accuracy
+        self.test_tot_accuracy(preds, y)
+        self.test_accuracy(preds, y)
+        accuracies = self.test_accuracy
         self.log("test/loss", loss, prog_bar=True)
         self.log(
             "test/acc",
-            self.tot_accuracy,
+            self.test_tot_accuracy,
             metric_attribute="tot_accuracy",
         )
         self.log(
